@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-first_name = 'Габриэль'
-middle_name = 'Александр'
-last_name = 'Бушар'
-phone = '+7 (915) 079-1930'
-email = 'gabouchard2002@gmail.com'
+about_me = {
+'first_name': 'Габриэль',
+'middle_name': 'Александр',
+'last_name': 'Бушар',
+'phone': '+7 (915) 079-1930',
+'email': 'gabouchard2002@gmail.com',
+}
 
 items = [
    {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
@@ -24,13 +26,30 @@ def index(request):
     return HttpResponse(text)
 
 def get_info(request):
-    global first_name, middle_name, last_name, phone, email
-    content = f""" <p>Имя: {first_name}</p>
-    <p>Второе имя: {middle_name}</p> 
-    <p>Фамилия {last_name}</p>
-    <p>Телефон: {phone}</p>
-    <p>Email: {email}</p>"""
+    content = f""" <p>Имя: {about_me['first_name']}</p>
+    <p>Второе имя: {about_me['middle_name']}</p> 
+    <p>Фамилия {about_me['last_name']}</p>
+    <p>Телефон: {about_me['phone']}</p>
+    <p>Email: {about_me['email']}</p>"""
     return HttpResponse(content)
+
+
+def get_item(request, item_number):
+    obj = {}
+    for item in items:
+        if item['id'] == item_number:
+            obj = item
+    if obj:
+        content = f"""
+        <ul>
+        <li>Id: {obj['id']}</li>
+        <li>Name: {obj['name']}</li>
+        <li>Quantity: {obj['quantity']}</li>
+        </ul>
+        """
+        return HttpResponse(content)
+    else:
+        return HttpResponse('<p>Error</p>')
 
 
 
