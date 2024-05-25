@@ -9,13 +9,13 @@ about_me = {
     'email': 'gabouchard2002@gmail.com',
 }
 
-items = {
+items = [
    {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
    {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
    {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
    {"id": 7, "name": "Картофель фри" ,"quantity":0},
    {"id": 8, "name": "Кепка" ,"quantity":124},
-}
+]
 
 
 def index(request):
@@ -46,4 +46,8 @@ def get_item(request, item_number):
 
 
 def get_all_items(request):
-    return render(request, 'items.html', items)
+    content = {}
+    for item in items:
+        content['content'] = item
+
+    return render(request, 'items.html', content)

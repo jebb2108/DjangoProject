@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+</head>
+<body>
+    <h2>Содержимое магазина:</h2> <br>
+    {% for item in content %}
+        <ol>
+            <li>Id товара: {{ content.id }}</li>
+            <li>Название товара: {{ content.name }}</li>
+            <li>Количество: {{ content.quantity }} </li>
+        </ol>
+    {% endfor %}    
+    <br>
+</body>
+</html>
