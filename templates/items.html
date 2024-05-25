@@ -12,7 +12,9 @@
             <li>Id товара: {{ content.id }}</li>
             <li>Название товара: {{ content.name }}</li>
             <li>Количество: {{ content.quantity }} </li>
-        </ol>
+        </ol> <br>
+        <a href="item/<int:{{content.it}}>">Link</a>
+
     {% endfor %}    
     <br>
 </body>
