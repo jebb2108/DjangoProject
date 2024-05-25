@@ -19,11 +19,11 @@ items = [
 
 
 def index(request):
-    text = """
-    <h1>"Изучаем django"</h1>
-    <strong>Автор</strong>: <i>Бушар Габриэль</i>
-    """
-    return render(request, 'index.html')
+    content = {
+        'name': "Бушар Габриэль Александр",
+        'email': 'gabouchard2002@gmail.com',
+    }
+    return render(request, 'index.html', content)
 
 
 def get_info(request):
@@ -69,3 +69,6 @@ def get_all_items(request):
         count += 1
 
     return HttpResponse(content)
+
+def get_all_fruit(request):
+    pass
