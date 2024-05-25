@@ -6,14 +6,15 @@
     <title>Items</title>
 </head>
 <body>
+    <header>
+        /<a href="/">Home</a>/<a href="/items">Items</a>/<a href="/about">About</a>
+    </header>
+
     <h2>Содержимое магазина:</h2> <br>
-    {% for item in content%}
+    {% for item in items %}
         <ol>
-            <li>Id товара: {{ item.id }}</li>
-            <li>Название товара: {{ item.name }}</li>
-            <li>Количество: {{item.quantity }} </li>
-        </ol> <br>
-        <a href="/item/{{item.id}}">Link</a>
+            <a href="/item/{{item.id}}">{{item.name}}</a>
+        </ol> 
     {% endfor %}
   
 </body>

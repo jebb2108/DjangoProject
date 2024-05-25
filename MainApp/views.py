@@ -32,25 +32,23 @@ def get_info(request):
     <p>Фамилия {about_me['last_name']}</p>
     <p>Телефон: {about_me['phone']}</p>
     <p>Email: {about_me['email']}</p>"""
-    return render(request, 'info.html', content)
+    return HttpResponse(content)
 
 
 def get_item(request, item_number):
-    for item in items:
-        if item['id'] == item_number:
-            obj = item
 
-    content = dict(obj)
+    item = next((item for item in items if item['id'] == item_number), None)
+    if item is not None:
+        content = {
+            'item': item,
+        }
     
-    return render(request, 'item.html', content)
+        return render(request, 'item.html', content)
+    return HttpResponseNotFound('Error')
 
 
 def get_all_items(request):
-    content = {}
-    count = 0
-    for item in items:
-        content[count] = item
-        count += 1
-
-    print(content)
+    content = {
+        'items': items
+    }
     return render(request, 'items.html', content)
