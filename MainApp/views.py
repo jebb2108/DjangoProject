@@ -23,7 +23,7 @@ def index(request):
     <h1>"Изучаем django"</h1>
     <strong>Автор</strong>: <i>Бушар Габриэль</i>
     """
-    return HttpResponse(text)
+    return render(request, 'index.html')
 
 def get_info(request):
     content = f""" <p>Имя: {about_me['first_name']}</p>
