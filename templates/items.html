@@ -7,15 +7,14 @@
 </head>
 <body>
     <h2>Содержимое магазина:</h2> <br>
-    {% for item in content %}
+    {% for item in content%}
         <ol>
-            <li>Id товара: {{ content.id }}</li>
-            <li>Название товара: {{ content.name }}</li>
-            <li>Количество: {{ content.quantity }} </li>
+            <li>Id товара: {{ item.id }}</li>
+            <li>Название товара: {{ item.name }}</li>
+            <li>Количество: {{item.quantity }} </li>
         </ol> <br>
-        <a href="item/<int:{{content.it}}>">Link</a>
-
-    {% endfor %}    
-    <br>
+        <a href="/item/{{item.id}}">Link</a>
+    {% endfor %}
+  
 </body>
 </html>

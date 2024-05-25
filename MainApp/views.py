@@ -47,7 +47,10 @@ def get_item(request, item_number):
 
 def get_all_items(request):
     content = {}
+    count = 0
     for item in items:
-        content['content'] = item
+        content[count] = item
+        count += 1
 
+    print(content)
     return render(request, 'items.html', content)
