@@ -9,13 +9,13 @@ about_me = {
     'email': 'gabouchard2002@gmail.com',
 }
 
-items = [
-    {"id": 1, "name": "Кроссовки abibas", "quantity": 5},
-    {"id": 2, "name": "Куртка кожаная", "quantity": 2},
-    {"id": 5, "name": "Coca-cola 1 литр", "quantity": 12},
-    {"id": 7, "name": "Картофель фри", "quantity": 0},
-    {"id": 8, "name": "Кепка", "quantity": 124},
-]
+items = {
+   {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
+   {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
+   {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
+   {"id": 7, "name": "Картофель фри" ,"quantity":0},
+   {"id": 8, "name": "Кепка" ,"quantity":124},
+}
 
 
 def index(request):
@@ -32,43 +32,18 @@ def get_info(request):
     <p>Фамилия {about_me['last_name']}</p>
     <p>Телефон: {about_me['phone']}</p>
     <p>Email: {about_me['email']}</p>"""
-    return HttpResponse(content)
+    return render(request, 'info.html', content)
 
 
 def get_item(request, item_number):
-    obj = {}
     for item in items:
         if item['id'] == item_number:
             obj = item
-    if obj:
-        content = f"""
-        <ul>
-        <li>Id: {obj['id']}</li>
-        <li>Name: {obj['name']}</li>
-        <li>Quantity: {obj['quantity']}</li>
-        </ul>
-        """
-        return HttpResponse(content)
 
-    return HttpResponseNotFound(f'<h2>Item with id={item_number} is not found</h2>')
+    content = dict(obj)
+    
+    return render(request, 'item.html', content)
 
 
 def get_all_items(request):
-    content = ''
-    count = 1
-    for item in items:
-        content += f'Item №{count}:'
-        content += f"""
-        <ul>
-        <li>Id: {item['id']}</li>
-        <li>Name: {item['name']}</li>
-        <li>Quantity: {item['quantity']}</li>
-        <a href="/items/{int(item['id'])}">Link:</a>
-        </ul>\n"""
-
-        count += 1
-
-    return HttpResponse(content)
-
-def get_all_fruit(request):
-    pass
+    return render(request, 'items.html', items)
