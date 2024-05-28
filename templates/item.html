@@ -12,12 +12,12 @@
 
     <h2>Содержимое товара:</h2>
     <ul>
+        {% if item.count == 0 %}
+           Товар нет на складе
+        {% else %}
         <li>Id товара: {{ item.id }}</li>
         <li>Наименование товара: {{ item.name }}</li>
-        {% if item.quantity == 0 %}
-           Количество: Товар отсутсвует
-        {% else %}
-        <li>Количество: {{ item.quantity }}</li>
+        <li>Количество: {{ item.count }}</li>
     </ul>
         {% endif %}
     <a href="/items">Вернуться к списку товаров</a>

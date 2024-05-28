@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from .models import Item
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 
 about_me = {
     'first_name': 'Габриэль',
@@ -8,14 +9,6 @@ about_me = {
     'phone': '+7 (915) 079-1930',
     'email': 'gabouchard2002@gmail.com',
 }
-
-items = [
-   {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
-   {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
-   {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
-   {"id": 7, "name": "Картофель фри" ,"quantity":0},
-   {"id": 8, "name": "Кепка" ,"quantity":124},
-]
 
 
 def index(request):
@@ -36,18 +29,17 @@ def get_info(request):
 
 
 def get_item(request, item_number):
-
-    item = next((item for item in items if item['id'] == item_number), None)
-    if item is not None:
-        content = {
-            'item': item,
-        }
+    item = get_object_or_404(Item, id=item_number)
+    # item = next((item for item in items if item['id'] == item_number), None)
+    content = {
+        'item': item,
+    }
     
-        return render(request, 'item.html', content)
-    return HttpResponseNotFound('Error')
+    return render(request, 'item.html', content)
 
 
 def get_all_items(request):
+    items = Item.objects.all()
     content = {
         'items': items
     }
