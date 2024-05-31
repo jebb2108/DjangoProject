@@ -4,18 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Items</title>
+    <style>
+
+        a:link, a:visited, a:hover, a:active  {
+            color: rgb(0, 0, 255);
+            text-decoration: none;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10ps;
+        }
+
+        .grid-item {
+            background-color: rgb(250, 250, 250);
+            border: 5px solid rgb(245, 245, 255);
+            padding: 20px;
+            margin: 10px;
+        }
+
+
+        p {
+            color: rgb(0, 0, 250)
+        }
+
+
+    </style>
 </head>
 <body>
     <header>
         /<a href="/">Home</a>/<a href="/items">Items</a>/<a href="/about">About</a>
     </header>
 
-    <h2>Содержимое магазина:</h2> <br>
+    <h2><span style="color: rgb(110, 110, 110); font-size: 40px;">Содержимое магазина:</span></h2> <br>
+
+    <div class="grid-container">
     {% for item in items %}
-        <ol>
-            <a href="/item/{{item.id}}">{{item.name}}</a>
-        </ol>
+        <div class="grid-item">
+            <a href="/item/{{item.id}}"><span style="color: rgb(27, 115, 191); font-size: 24px; font-weight: bold;">{{item.name}}</span></a>
+            <p><span style="color: rgb(83, 128, 180)">{{ item.description }}</span></p>
+        </div>
     {% endfor %}
+    </div>
   
 </body>
 </html>
